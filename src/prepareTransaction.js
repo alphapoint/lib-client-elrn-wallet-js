@@ -1,13 +1,10 @@
 import Elrn from '..'
 
-export default function prepareTransaction( destinationAddress , sendAmount , accountInfo , xKeyPair ) {
+export default function prepareTransaction( destinationAddress , sendAmount , accountInfo , xPub ) {
     return new Promise((resolve, reject) => {
         try {
             const config = {}
             let elrnClient = new Elrn(config)
-
-            const xPub = xKeyPair.xPubKey
-            const xPriv = xKeyPair.xPrivKey
 
             var bitcoinTransactionPrep = async function() {
                 let activity = await elrnClient.xPubToActivity(xPub, 'bitcoin');
@@ -24,7 +21,7 @@ export default function prepareTransaction( destinationAddress , sendAmount , ac
                 resolve(transactionPackage);
             }
             var ethereumTransactionPrep = async function(){
-                let address = await elrnClient.xPrvToEthereumAddress(xPriv, 'm/44\'/0\'/0')
+                let address = await elrnClient.xPrvToEthereumAddress(xPub, 'm/44\'/0\'/0')
                 let activity = await elrnClient.xPubToActivity(address, 'ethereum')
 
             }
