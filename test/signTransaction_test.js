@@ -14,9 +14,11 @@ suite('signTransaction', function() {
         }
         const sendAmount = 1100;
         const destinationAddress = '1FQcZ9AfYAGasWVHXYP7Nd4n2pDSdiwkWy';
-        const accountNumber = 0;
+        const accountInfo = {
+            network: 'bitcoin'
+        }
         
-        return elrnClient.prepareTransaction(destinationAddress, sendAmount , accountNumber, xKeyPair)
+        return elrnClient.prepareTransaction(destinationAddress, sendAmount , accountInfo, xKeyPair)
         .then((transactionPackage) => {
         	return elrnClient.xPrivToKeyPair(xKeyPair.xPrivKey, transactionPackage.inputPaths)
             .then((keyPairs) => {

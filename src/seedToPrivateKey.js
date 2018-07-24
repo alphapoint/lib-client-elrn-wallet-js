@@ -1,4 +1,5 @@
 const bitcoin = require('bitcoinjs-lib');
+const bip32 = require('bip32');
 const isBuffer = require('is-buffer');
 
 export default function seedToPrivateKey(seed, derivePathStr, network) {
@@ -6,10 +7,10 @@ export default function seedToPrivateKey(seed, derivePathStr, network) {
     if (!derivePathStr) Promise.reject(new Error('must call seedToPrivateKey with a derive path'));
     return new Promise((resolve, reject) => {
         try {
-            const root = bitcoin.HDNode.fromSeedBuffer(seed, bitcoin.networks[network]);
+            const root = bip32.fromSeed(seed);
             const child = root.derivePath(derivePathStr);
-            const keyPair = child.keyPair;
-            resolve(keyPair.toWIF());
+
+            resolve(child.toWIF());
         } catch (err) {
             reject(err);
         }

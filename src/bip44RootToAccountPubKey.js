@@ -1,4 +1,4 @@
-export default function bip44RootToAccountPivKey(rootNode, path, accountNumber) {
+export default function bip44RootToAccountPubKey(rootNode, path, accountNumber) {
     return new Promise((resolve, reject) => {
         try {
             const splitPath = path.split('/');

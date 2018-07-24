@@ -30,6 +30,7 @@ import signTransaction from './src/signTransaction.js';
 import xPubToCoinAddress from './src/xPubToCoinAddress.js';
 import xPrivToKeyPair from './src/xPrivToKeyPair.js';
 import checkAddressBalances from './src/checkAddressBalances.js';
+import generateMofNaddress from './src/generateMofNaddress.js'
 
 export default class Elrn {
     constructor(options) {
@@ -125,6 +126,9 @@ export default class Elrn {
     }
     bip44RootToAccountPubKey(rootNode, derivePath, accountNumber) {
         return bip44RootToAccountPubKey.call(this.options, rootNode, derivePath, accountNumber);
+    }
+    generateMofNaddress(pubKeys, requiredSignatures){
+        return generateMofNaddress.call(this.options, pubKeys, requiredSignatures);
     }
     xPubToCoinAddress(derivePath, xPubKey, addressNumber) {
         return xPubToCoinAddress.call(this.options, derivePath, xPubKey, addressNumber);

@@ -36,6 +36,7 @@ suite('mnemonicTo Signed and Built transaction', function() {
                                                     return elrnClient.signTransaction(unsignedTransaction, keyPairs)
                                                     .then((signedTransaction) => {
                                                         assert.equal(signedTransaction.build().toHex().length , 744 )
+                                                        console.log(signedTransaction.build().toHex())
                                                     }).catch(err => console.log(err))
                                                 }).catch(err => console.log(err))
                                             }).catch(err => console.log(err))

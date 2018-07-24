@@ -1,5 +1,6 @@
 const bitcoin = require('bitcoinjs-lib');
 const hdkey = require('ethereumjs-wallet/hdkey');
+const bip32 = require('bip32');
 const isBuffer = require('is-buffer');
 
 export default function seedToAddress(seed, path, coinExt) {
@@ -7,11 +8,12 @@ export default function seedToAddress(seed, path, coinExt) {
     if (!path) Promise.reject(new Error('must call seedToAddress with a derive path'));
     return new Promise((resolve, reject) => {
         try {
+            
             if (coinExt.type === 'bitcoinjs') {
-                const root = bitcoin.HDNode.fromSeedBuffer(seed, coinExt);
+                const root = bip32.fromSeed(seed);
                 const derivedNode = root.derivePath(path);
-                const keyPair = derivedNode.keyPair;
-                resolve(keyPair.getAddress().toString());
+                const address = bitcoin.payments.p2pkh({ pubkey: derivedNode.publicKey,network:coinExt }).address
+                resolve(address);
             }
             if (coinExt.type === 'erc20') {
                 const splitPath = path.split('/');
@@ -24,6 +26,7 @@ export default function seedToAddress(seed, path, coinExt) {
                 const walletAddress = childWallet.getAddressString();
                 resolve(walletAddress);
             }
+
         } catch (err) {
             reject(err);
         }

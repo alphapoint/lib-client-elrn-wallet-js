@@ -8,8 +8,8 @@ import Elrn from '..';
 const config = require(__dirname + '/config/options.js');
 const elrnClient = new Elrn(config);
 
-suite('xPriv to Coin PrivKey', function() {
-    test('returns a coin address', function() {
+suite('xPriv to Keypair', function() {
+    test('returns a keyapir from a xPrivkey', function() {
         const addressNumbers = [0,2];
         //mnemonic is -> strategy worth garlic gallery gesture happy trash boil ceiling weasel happy patrol
         //the extended account private key below is from the 0 account from the mnemonic above

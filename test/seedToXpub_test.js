@@ -6,8 +6,8 @@ const assert = chai.assert;
 const bufferFrom = require('buffer-from');
 import Elrn from '..';
 
-suite('seedToPublicKey', function() {
-    test('seedToPublicKey', function() {
+suite('seedToXPublicKey', function() {
+    test('seedToXPublicKey', function() {
         const config = require(__dirname + '/config/options.js');
         const elrnClient = new Elrn(config)
         //spring range position vocal foot tilt drastic diet tube song debris excite

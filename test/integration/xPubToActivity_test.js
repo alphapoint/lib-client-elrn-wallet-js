@@ -13,7 +13,7 @@ suite('xPubToActivity', function() {
         let xPubString = 'xpub6CDy2jtLYBVonu96ARo283eBmgEf3YJhg7kRNEAQ7oz7evLgCEfzGzTiieb8KjgwWzD7R49b5noTnTmKMQK8cZ9zPojTGtLtyNRcxDRQWWc'
         return elrnClient.xPubToActivity(xPubString, 'bitcoin')
         .then((activity) => {
-            console.log(JSON.stringify(activity))
+            // console.log(JSON.stringify(activity))
             assert.equal(typeof activity, 'object')
         })
     });

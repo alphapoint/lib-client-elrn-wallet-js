@@ -1,13 +1,14 @@
 const bitcoin = require('bitcoinjs-lib');
+const bip32 = require('bip32');
 
 export default (xPubKey, addressNumber) => {
     try {
-        const derivedNode = bitcoin.HDNode.fromBase58(xPubKey);
+        const derivedNode = bip32.fromBase58(xPubKey);
         const address = derivedNode.derive(0)
             .derive(addressNumber);
 
-		const keyPair = address.keyPair;
-		return keyPair.getAddress().toString();
+		
+		return bitcoin.payments.p2pkh({ pubkey: address.publicKey }).address.toString()
       } catch (err) {
         console.log(err);
      }
