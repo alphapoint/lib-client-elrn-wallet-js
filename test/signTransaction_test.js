@@ -8,19 +8,17 @@ suite('signTransaction', function() {
     test('can sign a unsigned transaction', function() {
         const config = require(__dirname + '/config/options.js');
         const elrnClient = new Elrn(config);
-        const xKeyPair= {
-        	xPrivKey: 'xprv9yEcdEMShowWaR4d4QG1kuhTDeQAe5arJtppZqknZUT8n81XehMjjC9EsNQuDUGtPULvm3E5s3qSkhXEL7WGKMJREMpSeeN1pdJTSK1qigj',
-        	xPubKey: 'xpub6CDy2jtLYBVonu96ARo283eBmgEf3YJhg7kRNEAQ7oz7evLgCEfzGzTiieb8KjgwWzD7R49b5noTnTmKMQK8cZ9zPojTGtLtyNRcxDRQWWc'
-        }
+        const xPub= 'xpub6CDy2jtLYBVonu96ARo283eBmgEf3YJhg7kRNEAQ7oz7evLgCEfzGzTiieb8KjgwWzD7R49b5noTnTmKMQK8cZ9zPojTGtLtyNRcxDRQWWc';
+        const xPriv = 'xprv9yEcdEMShowWaR4d4QG1kuhTDeQAe5arJtppZqknZUT8n81XehMjjC9EsNQuDUGtPULvm3E5s3qSkhXEL7WGKMJREMpSeeN1pdJTSK1qigj';
         const sendAmount = 1100;
         const destinationAddress = '1FQcZ9AfYAGasWVHXYP7Nd4n2pDSdiwkWy';
         const accountInfo = {
             network: 'bitcoin'
         }
         
-        return elrnClient.prepareTransaction(destinationAddress, sendAmount , accountInfo, xKeyPair)
+        return elrnClient.prepareTransaction(destinationAddress, sendAmount , accountInfo, xPub)
         .then((transactionPackage) => {
-        	return elrnClient.xPrivToKeyPair(xKeyPair.xPrivKey, transactionPackage.inputPaths)
+        	return elrnClient.xPrivToKeyPair(xPriv, transactionPackage.inputPaths)
             .then((keyPairs) => {
                 return elrnClient.signTransaction(transactionPackage.preparedTransaction, keyPairs)
                 .then((signedTransaction)=> {
