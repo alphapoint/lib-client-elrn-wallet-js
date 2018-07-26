@@ -31,11 +31,11 @@ suite('mnemonicTo Signed and Built transaction', function() {
                                         .then((xPriv) => {
                                             return elrnClient.xPrivToKeyPair(xPriv, paths)
                                             .then((keyPairs) => {
-                                                return elrnClient.inputsToUnsignedTransaction(inputs, '1FQcZ9AfYAGasWVHXYP7Nd4n2pDSdiwkWy', changeAddress, 1000, 1000)
+                                                return elrnClient.inputsToUnsignedTransaction(inputs, '3EAX2k5CioUwvn5suf1Uoc91amqWxcoSCi', changeAddress, 10000, 1000)
                                                 .then((unsignedTransaction) => {
                                                     return elrnClient.signTransaction(unsignedTransaction, keyPairs)
                                                     .then((signedTransaction) => {
-                                                        assert.equal(signedTransaction.build().toHex().length , 744 )
+                                                        assert.equal(signedTransaction.build().toHex().length , 742 )
                                                         console.log(signedTransaction.build().toHex())
                                                     }).catch(err => console.log(err))
                                                 }).catch(err => console.log(err))

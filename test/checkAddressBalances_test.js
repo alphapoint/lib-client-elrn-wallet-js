@@ -10,7 +10,7 @@ suite('checkAddressBalances', function() {
     test('checkAddressBalances returns an amount for the provided address', function() {
         const config = require(__dirname + '/config/options.js');
         const elrnClient = new Elrn(config)
-        let address = ['13kfmzSB5a1uAxiXdXJnG5B6Yoik7sJAts']
+        let address = ['1EMLo72RDpjV8ZRKFKxn9U2TNGfDnoHpoS']
         let network = 'bitcoin'
         return elrnClient.checkAddressBalances(address, network)
         .then((amount) => {
@@ -18,7 +18,7 @@ suite('checkAddressBalances', function() {
             for (var i = address.length - 1; i >= 0; i--) {
                 total += amount[address[i]].final_balance
             }
-            assert.equal(total, 98000);
+            assert.equal(total, 88000);
         });
     });
 });
