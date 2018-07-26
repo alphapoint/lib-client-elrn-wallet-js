@@ -7,7 +7,7 @@ export default (inputs, accountPubKey) => {
       Object.keys(inputs).map(inputTransaction => {
         Object.keys(inputs[inputTransaction]).map(inputn => {
           //make sure the accounts pubkey is the same as this unspentoutputs
-          if (accountPubKey === inputs[inputTransaction][inputn].xpub.m) {
+          if (inputs[inputTransaction][inputn].xpub  && accountPubKey === inputs[inputTransaction][inputn].xpub.m) {
             //set the path as our own, split and slice it to remove the m/0 baggage, then add it to the array of paths
             newPath = inputs[inputTransaction][inputn].xpub.path; 
             const splitPath = newPath.split('/');
