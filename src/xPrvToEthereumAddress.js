@@ -1,12 +1,8 @@
 const hdkey = require('ethereumjs-wallet/hdkey');
 
 export default function xPrvToEthereumAddress(key, path) {
-  if (typeof key !== 'string') {
-      return Promise.reject(new Error('must call xPrvToEthereumAddress with a key'));
-  }
-  if (typeof path !== 'string') {
-      return Promise.reject(new Error('must call xPrvToEthereumAddress with a path'));
-  }
+  if (typeof key !== 'string') { return Promise.reject(new Error('must call xPrvToEthereumAddress with a key')); }
+  if (typeof path !== 'string') { return Promise.reject(new Error('must call xPrvToEthereumAddress with a path')); }
   return new Promise((resolve, reject) => {
       try {
           const splitPath = path.split('/');

@@ -1,5 +1,7 @@
 
 export default (inputs, accountPubKey) => {
+  if (typeof inputs !== 'object') { return Promise.reject(new Error('You must call inputsToPaths with inputs, and the input must be an object')); }
+  if (typeof accountPubKey !== 'string') { return Promise.reject(new Error('You must call inputsToPaths with a accountPubKey, and the accountPubKey must be a string')); }
   return new Promise((resolve, reject) => {
     try {
       const cumulativePaths = [];

@@ -1,6 +1,9 @@
 const Transaction = require('ethereumjs-tx');
 export default (activity, destination , sendAmt, data) => {
-    if (!activity) { return Promise.reject(new Error('called activityToEthereumTx without activity')); }
+    if (typeof activity !== 'object') { return Promise.reject(new Error('You must call activityToChangeAddress with activity, and activity must be an object')); }
+    if (typeof destination !== 'string') { return Promise.reject(new Error('You must call activityToChangeAddress with destination, and destination must be a string')); }
+    if (typeof sendAmt !== 'number') { return Promise.reject(new Error('You must call activityToChangeAddress with a send Amount, and it must be a number')); }
+    
     return new Promise((resolve, reject) => {
         try {
           const gasPrice = 50;

@@ -1,5 +1,8 @@
 export default (unspentOutputs, sendAmount) => {
   return new Promise((resolve, reject) => {
+  if (typeof unspentOutputs !== 'object') { return Promise.reject(new Error('You must call unspentOutputsToInputs with unspentOutputs, and it must be a object')); }
+  if (typeof sendAmount !== 'number') { return Promise.reject(new Error('You must call unspentOutputsToInputs with a sendAmount, and sendAmount must be a number')); }
+
     try {
       let cumulativeValue = 0;
       const inputs = {};

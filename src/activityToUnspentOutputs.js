@@ -1,6 +1,8 @@
 
 export default (activity, unspentChecker) => {
-    if (!activity) { return Promise.reject(new Error('called activityToUnspentOutputs without activity')); }
+    if (typeof activity !== 'object') { return Promise.reject(new Error('You must call activityToUnspentOutputs with activity, and activity must be an object')); }
+    if (typeof unspentChecker !== 'object') { return Promise.reject(new Error('You must call activityToUnspentOutputs with unspentChecker, and unspentChecker must be an object')); }
+    
     return new Promise((resolve, reject) => {
         try {
           function unspentOutputMatcher(outputScript) {   

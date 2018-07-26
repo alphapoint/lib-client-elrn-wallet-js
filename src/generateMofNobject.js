@@ -3,6 +3,7 @@ const bufferFrom = require('buffer-from');
 
 export default function generateMofNaddress(pubKeys, requiredSignatures ) {
   if (requiredSignatures > pubKeys.length ) {return Promise.reject(new Error('You can\'t require more signatures than are in the provided pubKey array'));}
+  if (typeof requiredSignatures !== 'number') { return Promise.reject(new Error('You must call generateMofNaddress with a required amount of signatures')); }
   if (!Array.isArray(pubKeys) ) {return Promise.reject(new Error('You must call generateMofNaddress with a pubkey array'));}
   
       try {

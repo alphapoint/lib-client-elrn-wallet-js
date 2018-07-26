@@ -1,6 +1,12 @@
 const bitcoin = require('bitcoinjs-lib');
 
 export default (inputs, receiveAddress, changeAddress, sendAmt, feeAmount) => {
+  if (typeof inputs !== 'object') { return Promise.reject(new Error('You must call inputsToUnsignedTx with inputs, and the input must be an object')); }
+  if (typeof receiveAddress !== 'string') { return Promise.reject(new Error('You must call inputsToUnsignedTx with a destination address, and it must be a string')); }
+  if (typeof changeAddress !== 'string') { return Promise.reject(new Error('You must call inputsToUnsignedTx with a change address, and it must be a string')); }
+  if (typeof sendAmt !== 'number') { return Promise.reject(new Error('You must call inputsToUnsignedTx with a sendAmount, and it must be a number')); }
+  if (typeof feeAmount !== 'number') { return Promise.reject(new Error('You must call inputsToUnsignedTx with a feeAmount, and it must be a number')); }
+  
   return new Promise((resolve, reject) => {
     try {
       const sendAmount = parseInt(sendAmt);

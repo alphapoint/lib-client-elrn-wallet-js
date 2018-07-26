@@ -1,6 +1,7 @@
 const axios = require('axios');
 //takes an unsigned transaction and an array of privatekeys sourced from all of the unspent outputs
 export default transaction => {
+    if (typeof transaction !== 'object') { return Promise.reject(new Error('You must call broadcastTransaction with a transaction, and the transaction must be an object')); }
     return new Promise((resolve, reject) => {
        try {
         const hexxedTx = transaction.build().toHex();
@@ -8,7 +9,7 @@ export default transaction => {
 
         axios({
           method: 'post',
-          url,
+          url : url,
           data: {
             tx: hexxedTx
           },

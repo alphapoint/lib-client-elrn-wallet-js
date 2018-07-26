@@ -2,7 +2,7 @@ const axios = require('axios');
 //address must be an array
 export default function checkAddressBalances(addresses, network) {
   if (!(addresses instanceof Array)) { return Promise.reject(new Error('addresses need to be an Array')); }
-  if (!network) { return Promise.reject(new Error('called checkAddressBalance without providing network (example "bitcoin")')); }
+  if (typeof network !== 'string') { return Promise.reject(new Error('You must call seedToXpub with a coin-network, and it must be a string'));}
   return new Promise((resolve, reject) => {
       try {
           switch (network) {

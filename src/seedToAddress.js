@@ -5,10 +5,10 @@ const isBuffer = require('is-buffer');
 
 export default function seedToAddress(seed, path, coinExt) {
     if (isBuffer(seed) !== true) Promise.reject(new Error('must call seedToAddress with a buffer (see createSeed.js)'));
-    if (!path) Promise.reject(new Error('must call seedToAddress with a derive path'));
+    if (typeof path !== 'string') { return Promise.reject(new Error('You must call seedToAddress with a path, and the path must be a string')); }
+    if (typeof coinExt !== 'object') { return Promise.reject(new Error('You must call seedToAddress with a coin extension, and it must be a object')); }
     return new Promise((resolve, reject) => {
         try {
-            
             if (coinExt.type === 'bitcoinjs') {
                 const root = bip32.fromSeed(seed);
                 const derivedNode = root.derivePath(path);
