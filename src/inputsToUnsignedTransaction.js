@@ -7,6 +7,7 @@ export default (inputs, receiveAddress, changeAddress, sendAmt, feeAmount) => {
       const txb = new bitcoin.TransactionBuilder();
       txb.setVersion(1);
       let cumulativeOutputAmount = 0;
+
       Object.keys(inputs).map(inputTransaction => {
         Object.keys(inputs[inputTransaction]).map(inputn => {
           cumulativeOutputAmount += inputs[inputTransaction][inputn].value;
@@ -17,7 +18,11 @@ export default (inputs, receiveAddress, changeAddress, sendAmt, feeAmount) => {
       });
       const changeAmount = cumulativeOutputAmount - sendAmount - feeAmount;
       txb.addOutput(receiveAddress, sendAmount);
-      txb.addOutput(changeAddress, changeAmount);
+      //only if there's change, add a change address
+      if (changeAmount > 0 && changeAddress != null){
+        txb.addOutput(changeAddress, changeAmount);
+      }
+      
       resolve(txb);
     } catch (err) {
       reject(err);
