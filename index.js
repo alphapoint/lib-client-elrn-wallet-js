@@ -27,10 +27,12 @@ import bip44RootToAccountPrivKey from './src/bip44RootToAccountPrivKey.js';
 import bip44RootToAccountPubKey from './src/bip44RootToAccountPubKey.js';
 import seedToRoot from './src/seedToRoot.js';
 import signTransaction from './src/signTransaction.js';
+import signMultisigTx from './src/signMultisigTx.js';
 import xPubToCoinAddress from './src/xPubToCoinAddress.js';
+import xPubToUnspentOutputs from './src/xPubToUnspentOutputs.js';
 import xPrivToKeyPair from './src/xPrivToKeyPair.js';
 import checkAddressBalances from './src/checkAddressBalances.js';
-import generateMofNaddress from './src/generateMofNaddress.js'
+import generateMofNobject from './src/generateMofNobject.js'
 
 export default class Elrn {
     constructor(options) {
@@ -103,11 +105,17 @@ export default class Elrn {
     signTransaction(transaction, keyPairs) {
         return signTransaction.call(this.options, transaction, keyPairs);
     }
+    signMultisigTx(transaction, keyPair, MofNobject) {
+        return signMultisigTx.call(this.options, transaction, keyPair, MofNobject);
+    }
     xPubToActivity(xPubString, network) {
         return xPubToActivity.call(this.options, xPubString, network);
     }
-    activityToUnspentOutputs(activity) {
-        return activityToUnspentOutputs.call(this.options, activity);
+    xPubToUnspentOutputs(xPubString, network) {
+        return xPubToUnspentOutputs.call(this.options,xPubString, network);
+    }
+    activityToUnspentOutputs(activity, unspentChecker) {
+        return activityToUnspentOutputs.call(this.options, activity, unspentChecker);
     }
     activityToChangeAddress(activity, xPubKey, elrnClient) {
         return activityToChangeAddress.call(this.options, activity, xPubKey, elrnClient);
@@ -127,8 +135,8 @@ export default class Elrn {
     bip44RootToAccountPubKey(rootNode, derivePath, accountNumber) {
         return bip44RootToAccountPubKey.call(this.options, rootNode, derivePath, accountNumber);
     }
-    generateMofNaddress(pubKeys, requiredSignatures){
-        return generateMofNaddress.call(this.options, pubKeys, requiredSignatures);
+    generateMofNobject(pubKeys, requiredSignatures){
+        return generateMofNobject.call(this.options, pubKeys, requiredSignatures);
     }
     xPubToCoinAddress(derivePath, xPubKey, addressNumber) {
         return xPubToCoinAddress.call(this.options, derivePath, xPubKey, addressNumber);
