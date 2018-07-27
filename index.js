@@ -112,8 +112,8 @@ export default class Elrn {
     activityToChangeAddress(activity, xPubKey, elrnClient) {
         return activityToChangeAddress.call(this.options, activity, xPubKey, elrnClient);
     }
-    activityToEthereumTx(activity, destinationAddress , sendAmount , data){
-        return activityToEthereumTx.call(this.options, activity, destinationAddress, sendAmount, data);
+    activityToEthereumTx(activity, destination, sendAmount, data){
+        return activityToEthereumTx.call(this.options, activity, destination , sendAmount, data) ;
     }
     unspentOutputsToInputs(unspentOutputs, sendAmount) {
         return unspentOutputsToInputs.call(this.options, unspentOutputs, sendAmount);
